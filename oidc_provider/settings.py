@@ -19,18 +19,18 @@ class DefaultSettings(object):
         return settings.LOGIN_URL
 
     @property
-    def SITE_URL(self):
-        """
-        OPTIONAL. The OP server url.
-        """
-        return None
-
-    @property
     def ISSUER_URL(self):
         """
         OPTIONAL. The Issuer url.
         """
         return None
+
+    @property
+    def ISSUER_URL_WITH_TRAILING_SLASH(self):
+        """
+        OPTIONAL. When undefined ISSUER_URL, whether or not issuer URL with trailing slash
+        """
+        return False
 
     @property
     def OIDC_AFTER_USERLOGIN_HOOK(self):

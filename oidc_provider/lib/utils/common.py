@@ -28,7 +28,10 @@ def get_issuer_url(issuer_url: str = None, request: HttpRequest = None) -> str:
     if issuer_url:
         return issuer_url
     elif request:
-        return '{}://{}'.format(request.scheme, request.get_host())
+        issuer_url = '{}://{}'.format(request.scheme, request.get_host())
+        if settings.get('ISSUER_URL_WITH_TRAILING_SLASH'):
+            issuer_url += '/'
+        return issuer_url
     else:
         raise Exception('Either pass `issuer_url`, '
                         'or set `ISSUER_URL` in settings, '
