@@ -34,7 +34,7 @@ from oidc_provider.lib.errors import (
 from oidc_provider.lib.utils.authorize import strip_prompt_login
 from oidc_provider.lib.utils.common import (
     redirect,
-    get_site_url,
+    get_issuer_url,
     get_issuer,
     cors_allow_any,
 )
@@ -255,19 +255,19 @@ class ProviderInfoView(View):
     def get(self, request: HttpRequest, *args, **kwargs) -> JsonResponse:
         dic = dict()
 
-        site_url = get_site_url(request=request)
-        dic['issuer'] = get_issuer(site_url=site_url, request=request)
+        issuer_url = get_issuer_url(request=request)
+        dic['issuer'] = get_issuer(issuer_url=issuer_url, request=request)
 
-        dic['authorization_endpoint'] = site_url + reverse('oidc_provider:authorize')
-        dic['token_endpoint'] = site_url + reverse('oidc_provider:token')
-        dic['userinfo_endpoint'] = site_url + reverse('oidc_provider:userinfo')
-        dic['end_session_endpoint'] = site_url + reverse('oidc_provider:end-session')
-        dic['introspection_endpoint'] = site_url + reverse('oidc_provider:token-introspection')
+        dic['authorization_endpoint'] = issuer_url + reverse('oidc_provider:authorize')
+        dic['token_endpoint'] = issuer_url + reverse('oidc_provider:token')
+        dic['userinfo_endpoint'] = issuer_url + reverse('oidc_provider:userinfo')
+        dic['end_session_endpoint'] = issuer_url + reverse('oidc_provider:end-session')
+        dic['introspection_endpoint'] = issuer_url + reverse('oidc_provider:token-introspection')
 
         types_supported = [response_type.value for response_type in ResponseType.objects.all()]
         dic['response_types_supported'] = types_supported
 
-        dic['jwks_uri'] = site_url + reverse('oidc_provider:jwks')
+        dic['jwks_uri'] = issuer_url + reverse('oidc_provider:jwks')
 
         dic['id_token_signing_alg_values_supported'] = ['HS256', 'RS256']
 
@@ -278,7 +278,7 @@ class ProviderInfoView(View):
                                                         'client_secret_basic']
 
         if settings.get('OIDC_SESSION_MANAGEMENT_ENABLE'):
-            dic['check_session_iframe'] = site_url + reverse('oidc_provider:check-session-iframe')
+            dic['check_session_iframe'] = issuer_url + reverse('oidc_provider:check-session-iframe')
 
         response = JsonResponse(dic)
         response['Access-Control-Allow-Origin'] = '*'

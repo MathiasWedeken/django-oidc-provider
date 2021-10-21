@@ -34,12 +34,12 @@ class CommonTest(TestCase):
                          'http://localhost:8000/openid')
 
         # from custom settings
-        with self.settings(SITE_URL='http://otherhost:8000'):
+        with self.settings(ISSUER_URL='http://otherhost:8000'):
             self.assertEqual(get_issuer(),
                              'http://otherhost:8000/openid')
 
-        # `SITE_URL` not set, from `request`
-        with self.settings(SITE_URL=''):
+        # `ISSUER_URL` not set, from `request`
+        with self.settings(ISSUER_URL=''):
             self.assertEqual(get_issuer(request=request),
                              'http://host-from-request:8888/openid')
 
@@ -47,8 +47,8 @@ class CommonTest(TestCase):
         self.assertEqual(get_issuer(request=request),
                          'http://localhost:8000/openid')
 
-        # `site_url` can even be overridden manually
-        self.assertEqual(get_issuer(site_url='http://127.0.0.1:9000',
+        # `issuer_url` can even be overridden manually
+        self.assertEqual(get_issuer(issuer_url='http://127.0.0.1:9000',
                                     request=request),
                          'http://127.0.0.1:9000/openid')
 

@@ -8,6 +8,15 @@ All notable changes to this project will be documented in this file.
 Unreleased
 ==========
 
+0.9.0
+=====
+
+*2021-10-21*
+
+* Added: support Python 3.9.
+* Changed: Use `ISSUER_URL` as Issuer instead of `SITE_URL`.
+* Changed: dropping support for Django 2.x.
+
 0.8.2
 =====
 

@@ -26,6 +26,13 @@ class DefaultSettings(object):
         return None
 
     @property
+    def ISSUER_URL(self):
+        """
+        OPTIONAL. The Issuer url.
+        """
+        return None
+
+    @property
     def OIDC_AFTER_USERLOGIN_HOOK(self):
         """
         OPTIONAL.  Provide a way to plug into the process after

@@ -15,35 +15,35 @@ def redirect(uri: str) -> HttpResponse:
     return response
 
 
-def get_site_url(site_url: str = None, request: HttpRequest = None) -> str:
+def get_issuer_url(issuer_url: str = None, request: HttpRequest = None) -> str:
     """
-    Construct the site url.
+    Construct the issuer url.
 
     Orders to decide site url:
-        1. valid `site_url` parameter
-        2. valid `SITE_URL` in settings
+        1. valid `issuer_url` parameter
+        2. valid `ISSUER_URL` in settings
         3. construct from `request` object
     """
-    site_url = site_url or settings.get('SITE_URL')
-    if site_url:
-        return site_url
+    issuer_url = issuer_url or settings.get('ISSUER_URL')
+    if issuer_url:
+        return issuer_url
     elif request:
         return '{}://{}'.format(request.scheme, request.get_host())
     else:
-        raise Exception('Either pass `site_url`, '
-                        'or set `SITE_URL` in settings, '
+        raise Exception('Either pass `issuer_url`, '
+                        'or set `ISSUER_URL` in settings, '
                         'or pass `request` object.')
 
 
-def get_issuer(site_url: str = None, request: HttpRequest = None) -> str:
+def get_issuer(issuer_url: str = None, request: HttpRequest = None) -> str:
     """
     Construct the issuer full url. Basically is the site url with some path
     appended.
     """
-    site_url = get_site_url(site_url=site_url, request=request)
+    issuer_url = get_issuer_url(issuer_url=issuer_url, request=request)
     path = reverse('oidc_provider:provider-info') \
         .split('/.well-known/openid-configuration')[0]
-    issuer = site_url + path
+    issuer = issuer_url + path
 
     return str(issuer)
 

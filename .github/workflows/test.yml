@@ -21,7 +21,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install tox coveralls
     - name: Test
-      run: tox -e py38-docs
+      run: tox -e py39-docs
 
   django-30:
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install tox coveralls
     - name: Test
-      run: tox -e py38-django30
+      run: tox -e py39-django30
 
   django-31:
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install tox coveralls
     - name: Test
-      run: tox -e py38-django31
+      run: tox -e py39-django31
 
   django-32:
     runs-on: ubuntu-latest
@@ -78,4 +78,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install tox coveralls
     - name: Test
-      run: tox -e py38-django32
+      run: tox -e py39-django32

@@ -12,8 +12,8 @@ OPTIONAL. ``str``. Used to log the user in. By default Django's ``LOGIN_URL`` wi
 
 ``str``. Default is ``/accounts/login/`` (Django's ``LOGIN_URL``).
 
-SITE_URL
-========
+ISSUER_URL
+==========
 
 OPTIONAL. ``str``. The OP server url.
 

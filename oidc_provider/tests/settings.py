@@ -75,5 +75,5 @@ LOGGING = {
 
 # OIDC Provider settings.
 
-SITE_URL = 'http://localhost:8000'
+ISSUER_URL = 'http://localhost:8000'
 OIDC_USERINFO = 'oidc_provider.tests.app.utils.userinfo'
